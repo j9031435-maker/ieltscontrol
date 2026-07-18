@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 import { auth } from "@/auth";
 import { prisma } from "@/lib/prisma";
-import { anthropic, CLAUDE_MODEL } from "@/lib/anthropic";
+import { getAnthropicClient, CLAUDE_MODEL } from "@/lib/anthropic";
 import {
   WRITING_SYSTEM_PROMPT,
   buildWritingUserPrompt,
@@ -43,7 +43,7 @@ export async function POST(req: Request) {
 
   let evaluation: WritingEvaluation;
   try {
-    const message = await anthropic.messages.create({
+    const message = await getAnthropicClient().messages.create({
       model: CLAUDE_MODEL,
       max_tokens: 1500,
       system: WRITING_SYSTEM_PROMPT,

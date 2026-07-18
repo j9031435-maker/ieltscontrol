@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 import { auth } from "@/auth";
 import { prisma } from "@/lib/prisma";
-import { anthropic, CLAUDE_MODEL } from "@/lib/anthropic";
+import { getAnthropicClient, CLAUDE_MODEL } from "@/lib/anthropic";
 import {
   SPEAKING_SYSTEM_PROMPT,
   buildSpeakingUserPrompt,
@@ -50,7 +50,7 @@ export async function POST(req: Request) {
 
   let evaluation: SpeakingEvaluation;
   try {
-    const message = await anthropic.messages.create({
+    const message = await getAnthropicClient().messages.create({
       model: CLAUDE_MODEL,
       max_tokens: 1500,
       system: SPEAKING_SYSTEM_PROMPT,
