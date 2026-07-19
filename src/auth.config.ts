@@ -11,11 +11,17 @@ export const authConfig: NextAuthConfig = {
   trustHost: true,
   callbacks: {
     jwt({ token, user }) {
-      if (user) token.id = user.id;
+      if (user) {
+        token.id = user.id;
+        token.role = user.role;
+      }
       return token;
     },
     session({ session, token }) {
-      if (session.user && token.id) session.user.id = token.id as string;
+      if (session.user && token.id) {
+        session.user.id = token.id as string;
+        session.user.role = (token.role as "USER" | "ADMIN") ?? "USER";
+      }
       return session;
     },
   },

@@ -12,7 +12,10 @@ export default async function ProtectedLayout({
 
   return (
     <div className="min-h-screen flex flex-col">
-      <Navbar userName={session.user.name ?? session.user.email ?? ""} />
+      <Navbar
+        userName={session.user.name ?? session.user.email ?? ""}
+        isAdmin={session.user.role === "ADMIN"}
+      />
       <main className="flex-1 max-w-6xl w-full mx-auto px-4 py-8">{children}</main>
     </div>
   );

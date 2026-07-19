@@ -9,6 +9,10 @@ export default auth((req) => {
     const loginUrl = new URL("/login", req.nextUrl.origin);
     return NextResponse.redirect(loginUrl);
   }
+
+  if (req.nextUrl.pathname.startsWith("/admin") && req.auth.user.role !== "ADMIN") {
+    return NextResponse.redirect(new URL("/dashboard", req.nextUrl.origin));
+  }
 });
 
 export const config = {
@@ -19,5 +23,6 @@ export const config = {
     "/writing/:path*",
     "/speaking/:path*",
     "/results/:path*",
+    "/admin/:path*",
   ],
 };

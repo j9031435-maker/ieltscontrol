@@ -27,6 +27,12 @@ export default function Home() {
           <span className="font-bold text-indigo-600 text-lg">IELTS Control</span>
           <div className="flex items-center gap-3">
             <Link
+              href="/news"
+              className="text-sm font-medium text-slate-600 hover:text-slate-900"
+            >
+              Yangiliklar
+            </Link>
+            <Link
               href="/login"
               className="text-sm font-medium text-slate-600 hover:text-slate-900"
             >

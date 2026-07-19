@@ -11,9 +11,16 @@ const links = [
   { href: "/writing", label: "Writing" },
   { href: "/speaking", label: "Speaking" },
   { href: "/results", label: "Natijalar" },
+  { href: "/news", label: "Yangiliklar" },
 ];
 
-export default function Navbar({ userName }: { userName: string }) {
+export default function Navbar({
+  userName,
+  isAdmin,
+}: {
+  userName: string;
+  isAdmin?: boolean;
+}) {
   const pathname = usePathname();
 
   return (
@@ -42,6 +49,14 @@ export default function Navbar({ userName }: { userName: string }) {
           })}
         </nav>
         <div className="flex items-center gap-3">
+          {isAdmin && (
+            <Link
+              href="/admin"
+              className="text-sm font-medium text-amber-700 bg-amber-50 px-2.5 py-1 rounded-lg hover:bg-amber-100"
+            >
+              Admin panel
+            </Link>
+          )}
           <span className="hidden sm:inline text-sm text-slate-500">{userName}</span>
           <button
             onClick={() => signOut({ callbackUrl: "/" })}
