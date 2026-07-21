@@ -2,8 +2,9 @@
 
 IELTS imtihoniga tayyorgarlik ko'rish uchun veb-sayt. Barcha 4 ta bo'lim
 (Reading, Listening, Writing, Speaking) mavjud. Reading va Listening
-avtomatik baholanadi; Writing va Speaking javoblarini Claude (Anthropic)
-IELTS band-score mezonlari asosida tahlil qiladi.
+avtomatik baholanadi; Writing va Speaking javoblarini Google Gemini
+IELTS band-score mezonlari asosida tahlil qiladi. Foydalanuvchi hisoblari
+faqat admin panel orqali yaratiladi — ochiq ro'yxatdan o'tish yo'q.
 
 ## Ishga tushirish
 
@@ -21,7 +22,7 @@ IELTS band-score mezonlari asosida tahlil qiladi.
 
    - `DATABASE_URL` / `DIRECT_URL` — Postgres ulanish satrlari (masalan [Neon](https://neon.tech) bepul rejasidan)
    - `AUTH_SECRET` — `node -e "console.log(require('crypto').randomBytes(32).toString('base64'))"` orqali generatsiya qiling
-   - `ANTHROPIC_API_KEY` — Writing/Speaking bo'limlarini AI baholashi uchun kerak. [console.anthropic.com](https://console.anthropic.com/settings/keys) dan oling. Kalit qo'yilmasa, boshqa bo'limlar ishlayveradi, faqat Writing/Speaking AI baholashi xato qaytaradi.
+   - `GEMINI_API_KEY` — Writing/Speaking bo'limlarini AI baholashi uchun kerak. Bepul kalitni [aistudio.google.com/apikey](https://aistudio.google.com/apikey) dan oling. Kalit qo'yilmasa, boshqa bo'limlar ishlayveradi, faqat Writing/Speaking AI baholashi xato qaytaradi.
 
 3. Bazani yarating va namunaviy testlarni yuklang:
 
@@ -30,20 +31,26 @@ IELTS band-score mezonlari asosida tahlil qiladi.
    npx prisma db seed
    ```
 
-4. Dasturni ishga tushiring:
+4. Birinchi admin hisobini bazada to'g'ridan-to'g'ri belgilang (yoki mavjud foydalanuvchini ADMIN qiling):
+
+   ```bash
+   node -e "const {PrismaClient}=require('@prisma/client');const p=new PrismaClient();p.user.update({where:{email:'sizning@emailingiz.com'},data:{role:'ADMIN'}}).then(()=>p.$disconnect())"
+   ```
+
+5. Dasturni ishga tushiring:
 
    ```bash
    npm run dev
    ```
 
-   [http://localhost:3000](http://localhost:3000) manzilida ochiladi.
+   [http://localhost:3000](http://localhost:3000) manzilida ochiladi. Admin `/admin/users` orqali yangi o'quvchi hisoblarini (login/parol) yaratadi.
 
 ## Texnologiyalar
 
 - Next.js (App Router) + TypeScript + Tailwind CSS
 - Prisma ORM + PostgreSQL (Neon)
-- Auth.js (NextAuth v5) — email/parol orqali ro'yxatdan o'tish va kirish
-- Anthropic SDK (Claude) — Writing/Speaking javoblarini baholash
+- Auth.js (NextAuth v5) — email/parol orqali kirish, hisoblar faqat admin tomonidan yaratiladi
+- Google Gemini (`@google/generative-ai`) — Writing/Speaking javoblarini baholash (JSON mode)
 - Brauzer Web Speech API — Listening uchun matndan ovoz (TTS), Speaking uchun ovozdan matn (STT)
 
 ## Eslatmalar

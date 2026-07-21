@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 import { auth } from "@/auth";
 import { prisma } from "@/lib/prisma";
-import { getAnthropicClient, CLAUDE_MODEL } from "@/lib/anthropic";
+import { getGeminiJsonModel } from "@/lib/gemini";
 import {
   SPEAKING_SYSTEM_PROMPT,
   buildSpeakingUserPrompt,
@@ -41,26 +41,18 @@ export async function POST(req: Request) {
     );
   }
 
-  if (!process.env.ANTHROPIC_API_KEY) {
+  if (!process.env.GEMINI_API_KEY) {
     return NextResponse.json(
-      { error: "ANTHROPIC_API_KEY sozlanmagan. .env faylga API kalitingizni qo'shing." },
+      { error: "GEMINI_API_KEY sozlanmagan. .env faylga API kalitingizni qo'shing." },
       { status: 500 }
     );
   }
 
   let evaluation: SpeakingEvaluation;
   try {
-    const message = await getAnthropicClient().messages.create({
-      model: CLAUDE_MODEL,
-      max_tokens: 1500,
-      system: SPEAKING_SYSTEM_PROMPT,
-      messages: [{ role: "user", content: buildSpeakingUserPrompt(setTitle, parts) }],
-    });
-    const textBlock = message.content.find((b) => b.type === "text");
-    if (!textBlock || textBlock.type !== "text") {
-      throw new Error("AI matnli javob qaytarmadi.");
-    }
-    evaluation = parseSpeakingEvaluation(textBlock.text);
+    const model = getGeminiJsonModel(SPEAKING_SYSTEM_PROMPT);
+    const result = await model.generateContent(buildSpeakingUserPrompt(setTitle, parts));
+    evaluation = parseSpeakingEvaluation(result.response.text());
   } catch (err) {
     console.error("Speaking evaluation failed:", err);
     return NextResponse.json(

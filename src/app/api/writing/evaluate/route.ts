@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 import { auth } from "@/auth";
 import { prisma } from "@/lib/prisma";
-import { getAnthropicClient, CLAUDE_MODEL } from "@/lib/anthropic";
+import { getGeminiJsonModel } from "@/lib/gemini";
 import {
   WRITING_SYSTEM_PROMPT,
   buildWritingUserPrompt,
@@ -34,31 +34,20 @@ export async function POST(req: Request) {
     return NextResponse.json({ error: "Vazifa topilmadi." }, { status: 404 });
   }
 
-  if (!process.env.ANTHROPIC_API_KEY) {
+  if (!process.env.GEMINI_API_KEY) {
     return NextResponse.json(
-      { error: "ANTHROPIC_API_KEY sozlanmagan. .env faylga API kalitingizni qo'shing." },
+      { error: "GEMINI_API_KEY sozlanmagan. .env faylga API kalitingizni qo'shing." },
       { status: 500 }
     );
   }
 
   let evaluation: WritingEvaluation;
   try {
-    const message = await getAnthropicClient().messages.create({
-      model: CLAUDE_MODEL,
-      max_tokens: 1500,
-      system: WRITING_SYSTEM_PROMPT,
-      messages: [
-        {
-          role: "user",
-          content: buildWritingUserPrompt(task.taskType, task.prompt, task.minWords, responseText),
-        },
-      ],
-    });
-    const textBlock = message.content.find((b) => b.type === "text");
-    if (!textBlock || textBlock.type !== "text") {
-      throw new Error("AI matnli javob qaytarmadi.");
-    }
-    evaluation = parseWritingEvaluation(textBlock.text);
+    const model = getGeminiJsonModel(WRITING_SYSTEM_PROMPT);
+    const result = await model.generateContent(
+      buildWritingUserPrompt(task.taskType, task.prompt, task.minWords, responseText)
+    );
+    evaluation = parseWritingEvaluation(result.response.text());
   } catch (err) {
     console.error("Writing evaluation failed:", err);
     return NextResponse.json(
