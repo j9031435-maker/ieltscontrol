@@ -6,7 +6,7 @@ export default function DeleteButton({
   action,
   confirmText = "O'chirishni tasdiqlaysizmi?",
 }: {
-  action: () => Promise<void>;
+  action: () => Promise<{ error?: string } | void>;
   confirmText?: string;
 }) {
   const [pending, startTransition] = useTransition();
@@ -17,8 +17,9 @@ export default function DeleteButton({
       disabled={pending}
       onClick={() => {
         if (confirm(confirmText)) {
-          startTransition(() => {
-            action();
+          startTransition(async () => {
+            const result = await action();
+            if (result?.error) alert(result.error);
           });
         }
       }}

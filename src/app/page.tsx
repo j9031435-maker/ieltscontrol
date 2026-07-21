@@ -34,15 +34,9 @@ export default function Home() {
             </Link>
             <Link
               href="/login"
-              className="text-sm font-medium text-slate-600 hover:text-slate-900"
-            >
-              Kirish
-            </Link>
-            <Link
-              href="/register"
               className="text-sm font-medium bg-indigo-600 text-white px-4 py-2 rounded-lg hover:bg-indigo-700"
             >
-              Ro&apos;yxatdan o&apos;tish
+              Kirish
             </Link>
           </div>
         </div>
@@ -61,14 +55,8 @@ export default function Home() {
           </p>
           <div className="mt-8 flex justify-center gap-4">
             <Link
-              href="/register"
-              className="bg-indigo-600 text-white px-6 py-3 rounded-lg font-medium hover:bg-indigo-700"
-            >
-              Bepul boshlash
-            </Link>
-            <Link
               href="/login"
-              className="border border-slate-300 px-6 py-3 rounded-lg font-medium hover:bg-slate-50"
+              className="bg-indigo-600 text-white px-6 py-3 rounded-lg font-medium hover:bg-indigo-700"
             >
               Kirish
             </Link>

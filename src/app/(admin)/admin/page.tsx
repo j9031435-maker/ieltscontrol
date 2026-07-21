@@ -18,6 +18,7 @@ export default async function AdminHomePage() {
     { href: "/admin/writing", label: "Writing vazifalari", count: writingCount },
     { href: "/admin/speaking", label: "Speaking to'plamlari", count: speakingCount },
     { href: "/admin/news", label: "Yangiliklar", count: newsCount },
+    { href: "/admin/users", label: "Foydalanuvchilar", count: userCount },
   ];
 
   return (

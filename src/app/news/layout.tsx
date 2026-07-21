@@ -23,17 +23,12 @@ export default async function NewsLayout({ children }: { children: React.ReactNo
                 Dashboard
               </Link>
             ) : (
-              <>
-                <Link href="/login" className="text-sm font-medium text-slate-600 hover:text-slate-900">
-                  Kirish
-                </Link>
-                <Link
-                  href="/register"
-                  className="text-sm font-medium bg-indigo-600 text-white px-4 py-2 rounded-lg hover:bg-indigo-700"
-                >
-                  Ro&apos;yxatdan o&apos;tish
-                </Link>
-              </>
+              <Link
+                href="/login"
+                className="text-sm font-medium bg-indigo-600 text-white px-4 py-2 rounded-lg hover:bg-indigo-700"
+              >
+                Kirish
+              </Link>
             )}
           </div>
         </div>

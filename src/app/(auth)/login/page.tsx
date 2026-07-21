@@ -3,7 +3,6 @@
 import { useState } from "react";
 import { signIn } from "next-auth/react";
 import { useRouter } from "next/navigation";
-import Link from "next/link";
 
 export default function LoginPage() {
   const router = useRouter();
@@ -64,10 +63,7 @@ export default function LoginPage() {
         </button>
       </form>
       <p className="mt-4 text-sm text-slate-600">
-        Hisobingiz yo&apos;qmi?{" "}
-        <Link href="/register" className="text-indigo-600 font-medium">
-          Ro&apos;yxatdan o&apos;tish
-        </Link>
+        Hisobingiz yo&apos;qmi? Administrator bilan bog&apos;laning.
       </p>
     </div>
   );
