@@ -13,7 +13,9 @@ function getClient(): GoogleGenerativeAI {
   return globalForGemini.gemini;
 }
 
-export const GEMINI_MODEL = "gemini-2.0-flash";
+// Alias that always resolves to Google's current recommended Flash model,
+// so this doesn't need to be bumped by hand as model generations roll over.
+export const GEMINI_MODEL = "gemini-flash-latest";
 
 // Model instance configured to always return raw JSON (no markdown fences),
 // per the official Gemini JSON-mode support.
