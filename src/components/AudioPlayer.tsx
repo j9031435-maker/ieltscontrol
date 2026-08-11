@@ -1,12 +1,11 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { useBrowserSupport } from "@/lib/useBrowserSupport";
 
 export default function AudioPlayer({ script }: { script: string }) {
   const [playing, setPlaying] = useState(false);
-  const [supported] = useState(
-    () => typeof window !== "undefined" && "speechSynthesis" in window
-  );
+  const supported = useBrowserSupport(() => "speechSynthesis" in window);
   const [showTranscript, setShowTranscript] = useState(false);
 
   useEffect(() => {

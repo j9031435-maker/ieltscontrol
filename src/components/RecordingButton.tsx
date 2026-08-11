@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import { useBrowserSupport } from "@/lib/useBrowserSupport";
 
 const ERROR_MESSAGES: Record<string, string> = {
   "not-allowed": "Mikrofonga ruxsat berilmadi. Brauzer manzil qatoridagi qulf belgisini bosib, mikrofonga ruxsat bering va qayta urinib ko'ring.",
@@ -19,8 +20,8 @@ export default function RecordingButton({
 }) {
   const [recording, setRecording] = useState(false);
   const [error, setError] = useState<string | null>(null);
-  const [supported] = useState(
-    () => typeof window !== "undefined" && !!(window.SpeechRecognition ?? window.webkitSpeechRecognition)
+  const supported = useBrowserSupport(
+    () => !!(window.SpeechRecognition ?? window.webkitSpeechRecognition)
   );
   const recognitionRef = useRef<SpeechRecognitionInstance | null>(null);
   const baseTextRef = useRef("");
