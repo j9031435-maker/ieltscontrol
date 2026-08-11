@@ -33,12 +33,19 @@ export function buildWritingUserPrompt(
   taskType: WritingTaskType,
   prompt: string,
   minWords: number,
-  responseText: string
+  responseText: string,
+  chartData?: string | null
 ): string {
+  // For Task 1 the candidate sees a chart, so the examiner needs the same
+  // underlying figures to judge whether the described data is accurate.
+  const chartBlock = chartData
+    ? `\nThe candidate was shown a chart built from this data (JSON). Check that the figures and trends they describe actually match it:\n${chartData}\n`
+    : "";
+
   return `Task type: ${taskType}
 Task prompt:
 ${prompt}
-
+${chartBlock}
 Minimum word count: ${minWords}
 
 Candidate's response:

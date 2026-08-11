@@ -18,13 +18,21 @@ function getClient(): GoogleGenerativeAI {
 export const GEMINI_MODEL = "gemini-flash-latest";
 
 // Model instance configured to always return raw JSON (no markdown fences),
-// per the official Gemini JSON-mode support.
-export function getGeminiJsonModel(systemInstruction: string) {
+// per the official Gemini JSON-mode support. `maxOutputTokens` is raised for
+// bulk content generation, where one response holds several long passages.
+export function getGeminiJsonModel(systemInstruction: string, maxOutputTokens?: number) {
   return getClient().getGenerativeModel({
     model: GEMINI_MODEL,
     systemInstruction,
     generationConfig: {
       responseMimeType: "application/json",
+      ...(maxOutputTokens ? { maxOutputTokens } : {}),
     },
   });
+}
+
+/** Gemini's free tier allows only 5 requests/minute — surfaced to admins as-is. */
+export function isQuotaError(err: unknown): boolean {
+  const message = err instanceof Error ? err.message : String(err);
+  return message.includes("429") || message.toLowerCase().includes("quota");
 }

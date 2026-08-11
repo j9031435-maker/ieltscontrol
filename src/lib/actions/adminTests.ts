@@ -13,32 +13,44 @@ export interface QuestionInput {
   correctAnswer: string;
 }
 
+export interface PartInput {
+  title: string;
+  bodyText: string;
+  questions: QuestionInput[];
+}
+
 export interface TestInput {
   title: string;
   description: string;
-  bodyText: string;
-  questions: QuestionInput[];
+  parts: PartInput[];
 }
 
 function sectionPath(section: Section) {
   return section === "READING" ? "/admin/reading" : "/admin/listening";
 }
 
-function toQuestionCreateData(questions: QuestionInput[]) {
-  return questions.map((q, i) => ({
-    order: i + 1,
-    type: q.type,
-    promptText: q.promptText,
-    options:
-      q.type === "MCQ"
-        ? JSON.stringify(
-            q.options
-              .split(",")
-              .map((o) => o.trim())
-              .filter(Boolean)
-          )
-        : null,
-    correctAnswer: q.correctAnswer,
+function toPartCreateData(parts: PartInput[]) {
+  return parts.map((p, pi) => ({
+    part: pi + 1,
+    title: p.title.trim() || null,
+    bodyText: p.bodyText,
+    questions: {
+      create: p.questions.map((q, qi) => ({
+        order: qi + 1,
+        type: q.type,
+        promptText: q.promptText,
+        options:
+          q.type === "MCQ"
+            ? JSON.stringify(
+                q.options
+                  .split(",")
+                  .map((o) => o.trim())
+                  .filter(Boolean)
+              )
+            : null,
+        correctAnswer: q.correctAnswer,
+      })),
+    },
   }));
 }
 
@@ -50,8 +62,7 @@ export async function createTest(section: Section, data: TestInput) {
       section,
       title: data.title,
       description: data.description || null,
-      bodyText: data.bodyText,
-      questions: { create: toQuestionCreateData(data.questions) },
+      parts: { create: toPartCreateData(data.parts) },
     },
   });
 
@@ -62,15 +73,15 @@ export async function createTest(section: Section, data: TestInput) {
 export async function updateTest(testId: string, section: Section, data: TestInput) {
   await requireAdmin();
 
+  // Parts are replaced wholesale; deleting them cascades to their questions.
   await prisma.test.update({
     where: { id: testId },
     data: {
       title: data.title,
       description: data.description || null,
-      bodyText: data.bodyText,
-      questions: {
+      parts: {
         deleteMany: {},
-        create: toQuestionCreateData(data.questions),
+        create: toPartCreateData(data.parts),
       },
     },
   });

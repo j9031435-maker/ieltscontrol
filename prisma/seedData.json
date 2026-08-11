@@ -1,0 +1,648 @@
+{
+  "readingParts": [
+    {
+      "title": "The Rise of Vertical Farming",
+      "bodyText": "Vertical farming is an innovative agricultural method that involves growing crops in vertically stacked layers, often integrated into structures like skyscrapers, converted warehouses, or repurposed shipping containers. Unlike traditional farming, which relies on expansive horizontal land and unpredictable outdoor weather, vertical farming utilizes Controlled Environment Agriculture (CEA) technology. This system allows growers to precisely regulate artificial lighting, ambient temperature, humidity, and nutrient delivery, enabling year-round crop production regardless of seasonal shifts.\n\nOne of the primary benefits of vertical farming is its exceptional land efficiency. Studies indicate that a vertical farm can produce up to ten times the yield of a conventional farm per square meter. Furthermore, because these facilities are usually constructed near or inside densely populated urban centers—such as Tokyo, Singapore, and New York—they significantly shorten the food supply chain. Shorter transport distances drastically reduce transport emissions and ensure that fresh produce reaches local consumers with minimal spoilage.\n\nWater conservation is another key advantage of this approach. Most vertical facilities employ advanced hydroponic or aeroponic growing systems. Hydroponics involves cultivating plants in a nutrient-rich liquid solution without soil, whereas aeroponics suspends plant roots in the air and mists them with nutrients at scheduled intervals. These closed-loop mechanisms continuously recycle water, using up to 95 percent less water than traditional soil-based agriculture. Additionally, because crops are grown indoors within controlled, sterile environments, the need for chemical pesticides and herbicides is almost entirely eliminated, yielding cleaner food.\n\nDespite these benefits, vertical farming faces notable economic and technical challenges. High initial capital investment is required to construct facilities, install automated infrastructure, and purchase specialized LED lighting systems. High electricity consumption remains a major operational drawback, as artificial lights and climate control systems demand substantial power. However, advances in energy-efficient LED technology and the integration of renewable power sources are steadily reducing these overhead costs. While vertical farms currently concentrate on high-value crops like leafy greens, berries, and herbs, researchers predict that ongoing developments could soon render vertical cultivation viable for staple crops such as wheat and rice.",
+      "questions": [
+        {
+          "type": "TRUE_FALSE_NG",
+          "promptText": "Controlled Environment Agriculture allows vertical farms to produce crops throughout the entire year.",
+          "correctAnswer": "TRUE"
+        },
+        {
+          "type": "TRUE_FALSE_NG",
+          "promptText": "Traditional farms produce more food per square meter than vertical farms.",
+          "correctAnswer": "FALSE"
+        },
+        {
+          "type": "TRUE_FALSE_NG",
+          "promptText": "The first commercial vertical farm was established in Tokyo.",
+          "correctAnswer": "NOT GIVEN"
+        },
+        {
+          "type": "TRUE_FALSE_NG",
+          "promptText": "Aeroponic systems grow plants by submerging their roots in nutrient-rich soil.",
+          "correctAnswer": "FALSE"
+        },
+        {
+          "type": "FILL_BLANK",
+          "promptText": "Vertical farming uses ______ technology to control light, temperature, and humidity levels.",
+          "correctAnswer": "Controlled Environment Agriculture|CEA"
+        },
+        {
+          "type": "FILL_BLANK",
+          "promptText": "In aeroponic systems, plant roots are kept in the air and sprayed with ______.",
+          "correctAnswer": "nutrients"
+        },
+        {
+          "type": "FILL_BLANK",
+          "promptText": "Vertical farms utilize ______ mechanisms that allow up to 95 percent of water to be recycled.",
+          "correctAnswer": "closed-loop"
+        },
+        {
+          "type": "MCQ",
+          "promptText": "According to the passage, what is a primary cause of high running costs in vertical farms?",
+          "options": [
+            "A) Continuous soil replacement expenses",
+            "B) High electricity consumption from lighting and climate control",
+            "C) High transportation fees for importing seeds",
+            "D) Expensive water supply utility bills"
+          ],
+          "correctAnswer": "B) High electricity consumption from lighting and climate control"
+        },
+        {
+          "type": "MCQ",
+          "promptText": "How does building vertical farms in urban areas benefit the environment?",
+          "options": [
+            "A) It completely eliminates the need for electricity.",
+            "B) It frees up city skyscrapers for public housing.",
+            "C) It shortens supply chains and cuts transport emissions.",
+            "D) It allows crops to rely entirely on natural sunlight."
+          ],
+          "correctAnswer": "C) It shortens supply chains and cuts transport emissions."
+        },
+        {
+          "type": "MCQ",
+          "promptText": "Which types of crops are currently main products of vertical farming facilities?",
+          "options": [
+            "A) Wheat, corn, and rice",
+            "B) Leafy greens, berries, and herbs",
+            "C) Potatoes, carrots, and onions",
+            "D) Soybeans, sugarcane, and cotton"
+          ],
+          "correctAnswer": "B) Leafy greens, berries, and herbs"
+        }
+      ]
+    },
+    {
+      "title": "Mitigating Oceanic Plastic Contamination",
+      "bodyText": "The accumulation of plastic waste in the world's oceans has evolved into one of the most pressing environmental crises of the twenty-first century. Each year, an estimated eight million metric tons of plastic enter marine ecosystems, carried by wind, maritime activity, and river networks that function as major conduits for urban waste. Synthetic polymers possess remarkable durability and low production costs, yet these very attributes prevent them from readily degrading in natural environments. Instead, macro-plastics undergo photo-degradation—a process driven by ultraviolet solar radiation that fragments larger items into microscopic particles known as microplastics, defined as pieces measuring less than five millimeters in length.\n\nDr. Elena Rostova, a marine ecologist at the Oceanic Research Institute, emphasizes that the true danger of plastic pollution lies in its insidious spread through marine food webs. \"While floating garbage patches comprised of discarded bottles and lost commercial fishing gear attract significant media attention, microplastics pose a far more pervasive threat,\" Rostova notes. Marine organisms ranging from tiny zooplankton to massive baleen whales inadvertently consume these micro-particles. Ingesting synthetic debris creates a false sense of fullness in animals, frequently resulting in malnourishment or starvation. Furthermore, plastic surfaces absorb persistent organic pollutants (POPs) present in seawater. When animals consume contaminated plastic, these toxic chemical compounds bioaccumulate within animal tissues, ultimately posing health risks to human consumers.\n\nAddressing oceanic plastic contamination requires a coordinated approach targeting both environmental remediation and preventative intervention. Interventions include specialized collection vessels and floating barriers designed to capture plastic debris from oceanic gyres. However, oceanographer Professor Liam Vance cautions that offshore retrieval efforts address only a small fraction of the total volume. \"Attempting to clean the open ocean without stopping terrestrial waste leakage is like trying to bail out a filled bathtub without turning off the faucet,\" Vance explains. He highlights research indicating that over eighty percent of ocean plastic originates from land-based activities in regions lacking modern waste management systems. Recent hydrological studies reveal that ten major river systems contribute nearly ninety percent of all land-derived marine plastic pollution.\n\nConsequently, policy experts advocate for structural changes in manufacturing and international legislation. Extended Producer Responsibility (EPR) regulations are gaining global momentum, mandating that plastic manufacturers fund recycling infrastructure and end-of-life collection. Simultaneously, material scientists are refining bio-based, fully compostable polymers that degrade harmlessly in marine environments. Experts universally concur that combining legislative reform, industrial accountability, and reduced reliance on single-use packaging offers the only viable path to protecting ocean ecosystems.",
+      "questions": [
+        {
+          "type": "FILL_BLANK",
+          "promptText": "The breakdown of larger plastic items into microplastics is caused by ______, which is supplied by sunlight.",
+          "correctAnswer": "ultraviolet solar radiation|UV radiation|ultraviolet radiation"
+        },
+        {
+          "type": "FILL_BLANK",
+          "promptText": "Microplastics are defined as plastic pieces measuring under ______ in size.",
+          "correctAnswer": "five millimeters|5 millimeters|5mm"
+        },
+        {
+          "type": "FILL_BLANK",
+          "promptText": "Plastics in seawater absorb harmful substances known as ______, which accumulate in marine food webs.",
+          "correctAnswer": "persistent organic pollutants|POPs"
+        },
+        {
+          "type": "FILL_BLANK",
+          "promptText": "Professor Vance compares ocean cleanup efforts without land prevention to trying to empty a filled ______.",
+          "correctAnswer": "bathtub"
+        },
+        {
+          "type": "TRUE_FALSE_NG",
+          "promptText": "Dr. Elena Rostova considers floating garbage patches to be a greater threat than microplastics.",
+          "correctAnswer": "FALSE"
+        },
+        {
+          "type": "TRUE_FALSE_NG",
+          "promptText": "More than 80 percent of marine plastic waste comes from land-based sources.",
+          "correctAnswer": "TRUE"
+        },
+        {
+          "type": "TRUE_FALSE_NG",
+          "promptText": "Extended Producer Responsibility laws place the entire financial burden of recycling on individual citizens.",
+          "correctAnswer": "FALSE"
+        },
+        {
+          "type": "TRUE_FALSE_NG",
+          "promptText": "Bio-based polymers have already eliminated all plastic pollution in major river systems.",
+          "correctAnswer": "FALSE"
+        },
+        {
+          "type": "MCQ",
+          "promptText": "According to the text, why does ingesting microplastics lead to starvation in marine animals?",
+          "options": [
+            "A) It destroys their ability to digest organic vegetation.",
+            "B) It creates a false feeling of fullness, stopping them from eating real food.",
+            "C) It damages their teeth, making them unable to catch prey.",
+            "D) It increases their metabolic rate beyond normal limits."
+          ],
+          "correctAnswer": "B) It creates a false feeling of fullness, stopping them from eating real food."
+        },
+        {
+          "type": "MCQ",
+          "promptText": "What significance do the ten major river systems mentioned in the passage hold?",
+          "options": [
+            "A) They generate ninety percent of all ocean plastic cleanup funding.",
+            "B) They collect microplastics directly from deep sea oceanic gyres.",
+            "C) They carry nearly ninety percent of land-derived plastic pollution to the ocean.",
+            "D) They produce bio-based polymers naturally in coastal areas."
+          ],
+          "correctAnswer": "C) They carry nearly ninety percent of land-derived plastic pollution to the ocean."
+        }
+      ]
+    },
+    {
+      "title": "The Neurobiology and Functions of Sleep",
+      "bodyText": "For centuries, human sleep was regarded as a passive state of physiological quiescence—a temporary suspension of consciousness during which the brain powered down to conserve energy. Modern neurobiology, however, has dismantled this reductionist paradigm, revealing sleep to be an intricate, highly dynamic process essential for cognitive maintenance, metabolic regulation, and neurological health. Far from being dormant, the sleeping brain exhibits complex patterns of synchronized electrical activity, transitioning through distinct architectural stages that perform vital homeostatic functions.\n\nSleep architecture is fundamentally divided into non-rapid eye movement (NREM) sleep and rapid eye movement (REM) sleep. NREM sleep progresses from light transitional states to deep, slow-wave sleep. During slow-wave sleep, low-frequency, high-amplitude delta waves oscillate across the cerebral cortex, triggering a profound reorganization of neural connections. It is during this stage that memory consolidation predominantly transpires. Short-term, fragile memory traces stored within the hippocampus are systematically transferred to the neocortex for long-term storage, thereby stabilizing newly acquired information and restoring hippocampal capacity for future learning.\n\nCentral to these restorative processes is the circadian rhythm, an endogenous twenty-four-hour biological clock governed by the suprachiasmatic nucleus (SCN) within the hypothalamus. The SCN responds to environmental light cues, suppressing or releasing the hormone melatonin to synchronize the sleep-wake cycle with external daylight patterns. Disruptions to this delicate mechanism, caused by shift work or nocturnal exposure to short-wavelength blue light, impair sleep quality and alter physiological homeostasis.\n\nEqually crucial is the recently identified glymphatic system, a specialized glial-dependent waste clearance mechanism in the central nervous system. During wakefulness, metabolic waste products accumulate within the brain's extracellular matrix. Upon entering deep slow-wave sleep, interstitial space expands significantly, enabling cerebrospinal fluid to wash through brain tissue and cleanse toxic metabolic byproducts, such as beta-amyloid and tau proteins. The aggregation of these specific proteins is heavily implicated in the pathogenesis of neurodegenerative conditions like Alzheimer's disease. Consequently, persistent sleep deprivation severely compromises the brain's cleaning capacity, accelerating cognitive decay.\n\nParadoxically, REM sleep—the stage dominated by vivid dreams—exhibits metabolic and electrical activity almost identical to waking states. During REM, neural networks regulating emotion, particularly the amygdala and prefrontal cortex, undergo essential recalibration. Scientists propose that REM sleep serves an emotional buffering function, processing stressful experiences while neurochemical levels of norepinephrine are suppressed, effectively stripping traumatic events of their acute emotional distress.\n\nDespite overwhelming empirical evidence illustrating sleep's non-negotiable status, modern societal structures continually penalize rest in pursuit of relentless productivity. The widespread proliferation of artificial illumination, digital screens, and extended work hours has engendered a chronic global sleep deficit. Neuroscientists emphasize that viewing sleep as an optional luxury rather than a biological imperative carries severe consequences, elevating risks for cardiovascular disease, metabolic syndrome, and psychiatric illness. Reversing this trajectory requires a comprehensive paradigm shift, elevating sleep hygiene to a fundamental pillar of public health policy.",
+      "questions": [
+        {
+          "type": "FILL_BLANK",
+          "promptText": "The endogenous twenty-four-hour sleep cycle is controlled by a hypothalamic structure called the ______.",
+          "correctAnswer": "suprachiasmatic nucleus|SCN"
+        },
+        {
+          "type": "FILL_BLANK",
+          "promptText": "During slow-wave sleep, short-term memories are transferred from the hippocampus to the ______ for permanent storage.",
+          "correctAnswer": "neocortex"
+        },
+        {
+          "type": "FILL_BLANK",
+          "promptText": "The brain's waste removal mechanism, which clears metabolic byproducts during sleep, is called the ______ system.",
+          "correctAnswer": "glymphatic"
+        },
+        {
+          "type": "FILL_BLANK",
+          "promptText": "The SCN regulates the sleep-wake cycle by controlling the secretion of the hormone ______.",
+          "correctAnswer": "melatonin"
+        },
+        {
+          "type": "TRUE_FALSE_NG",
+          "promptText": "Modern neurobiology supports the historical view that sleep is merely a state of passive brain inactivity.",
+          "correctAnswer": "FALSE"
+        },
+        {
+          "type": "TRUE_FALSE_NG",
+          "promptText": "Toxic proteins like beta-amyloid and tau are removed most efficiently during wakefulness.",
+          "correctAnswer": "FALSE"
+        },
+        {
+          "type": "TRUE_FALSE_NG",
+          "promptText": "Levels of norepinephrine are suppressed during REM sleep to help process emotional memories.",
+          "correctAnswer": "TRUE"
+        },
+        {
+          "type": "TRUE_FALSE_NG",
+          "promptText": "Shift workers are immune to circadian rhythm disruptions due to genetic adaptation.",
+          "correctAnswer": "FALSE"
+        },
+        {
+          "type": "MCQ",
+          "promptText": "What physiological change occurs in the brain during deep slow-wave sleep to facilitate waste clearance?",
+          "options": [
+            "A) The cerebral cortex stops electrical activity completely.",
+            "B) Interstitial space expands, allowing cerebrospinal fluid to wash through tissue.",
+            "C) Glial cells increase the release of stress neurochemicals.",
+            "D) The hippocampus shrinks to store long-term memories."
+          ],
+          "correctAnswer": "B) Interstitial space expands, allowing cerebrospinal fluid to wash through tissue."
+        },
+        {
+          "type": "MCQ",
+          "promptText": "According to the passage, what function does REM sleep fulfill regarding human emotion?",
+          "options": [
+            "A) It intensifies traumatic memories to prepare the brain for real-world stress.",
+            "B) It permanently erases emotional memories from the prefrontal cortex.",
+            "C) It recalibrates neural circuits and reduces acute emotional distress from memories.",
+            "D) It increases norepinephrine levels to boost daytime mood resilience."
+          ],
+          "correctAnswer": "C) It recalibrates neural circuits and reduces acute emotional distress from memories."
+        }
+      ]
+    }
+  ],
+  "listeningParts": [
+    {
+      "title": "Section 1: Riverside Community Centre Membership Enquiry",
+      "bodyText": "Mark: Good morning, Riverside Community Centre. How can I help you today?\nSarah: Hello. I would like to ask about signing up for a sports membership for myself and my husband.\nMark: Of course. My name is Mark. I can take your details now. What is your full name, please?\nSarah: It is Sarah Jenkins. That is J-E-N-K-I-N-S.\nMark: Thank you. And a contact phone number?\nSarah: My mobile number is 07700 900432.\nMark: Great. Which membership package are you interested in? We have the Standard Plan at thirty-five pounds a month, or the Gold Plan for fifty pounds.\nSarah: What does the Gold Plan include?\nMark: It includes full access to the gym, the swimming pool, and the sauna, plus free parking in Lot B.\nSarah: Oh, free parking sounds great. We will go with the Gold Plan then.\nMark: Excellent choice. When would you like the membership to start?\nSarah: Could we start it on the fourteenth of October?\nMark: Yes, October fourteenth is fine. You will also need to attend an induction session before using the equipment. The next available slot is in Room 204 on Friday at 6:00 PM.\nSarah: Room 204 on Friday at six. Perfect. Are there any restrictions on swimming pool hours for Gold members?\nMark: The pool is open from 6:00 AM to 10:00 PM every day, but adult-only swimming is strictly between 7:00 AM and 9:00 AM.\nSarah: That suits us well as we like early morning swims. Is there an admin fee when we join today?\nMark: Normally there is a registration fee of fifteen pounds per person, but since you are joining together, we discount it to twenty pounds total.\nSarah: Wonderful. Can I pay by card right now?\nMark: Certainly. Let me process that for you.",
+      "questions": [
+        {
+          "type": "FILL_BLANK",
+          "promptText": "The customer's surname is ____.",
+          "correctAnswer": "Jenkins"
+        },
+        {
+          "type": "FILL_BLANK",
+          "promptText": "The customer's contact phone number is ____.",
+          "correctAnswer": "07700 900432|07700900432"
+        },
+        {
+          "type": "MCQ",
+          "promptText": "Which membership package did Sarah choose?",
+          "options": [
+            "Standard Plan",
+            "Gold Plan",
+            "Family Plan",
+            "Weekend Plan"
+          ],
+          "correctAnswer": "Gold Plan"
+        },
+        {
+          "type": "MCQ",
+          "promptText": "How much is the monthly fee for the Gold Plan?",
+          "options": [
+            "35 pounds",
+            "50 pounds",
+            "20 pounds",
+            "15 pounds"
+          ],
+          "correctAnswer": "50 pounds"
+        },
+        {
+          "type": "FILL_BLANK",
+          "promptText": "Gold members receive free parking in Lot ____.",
+          "correctAnswer": "B"
+        },
+        {
+          "type": "FILL_BLANK",
+          "promptText": "The membership start date requested is October ____.",
+          "correctAnswer": "14|14th|fourteenth"
+        },
+        {
+          "type": "FILL_BLANK",
+          "promptText": "The induction session will take place in Room ____.",
+          "correctAnswer": "204"
+        },
+        {
+          "type": "MCQ",
+          "promptText": "What time does the induction session begin on Friday?",
+          "options": [
+            "6:00 AM",
+            "7:00 AM",
+            "6:00 PM",
+            "9:00 PM"
+          ],
+          "correctAnswer": "6:00 PM"
+        },
+        {
+          "type": "TRUE_FALSE_NG",
+          "promptText": "Adult-only swimming takes place between 7:00 AM and 9:00 AM.",
+          "correctAnswer": "TRUE"
+        },
+        {
+          "type": "MCQ",
+          "promptText": "What is the total discounted registration fee for both people?",
+          "options": [
+            "15 pounds",
+            "20 pounds",
+            "30 pounds",
+            "35 pounds"
+          ],
+          "correctAnswer": "20 pounds"
+        }
+      ]
+    },
+    {
+      "title": "Section 2: Highfield Botanical Gardens Guided Tour",
+      "bodyText": "Guide: Welcome everyone to the Highfield Botanical Gardens. My name is Claire, and I am the head tour leader today. Before we begin our walking tour, I would like to give you a quick overview of the garden layout and today's practical arrangements. The main entrance where we are standing opens directly into the Rose Garden, which features over two hundred varieties of roses. If you head straight along the central pathway, you will reach the Glasshouse, which houses our famous tropical orchid collection. Please note that temperature inside the Glasshouse is kept at twenty-six degrees Celsius, so you may want to remove heavy coats before entering. To the left of the Glasshouse, you will find the Heritage Tea Room. Lunch is served there from 12:00 PM to 2:30 PM, and they offer a range of vegetarian and gluten-free sandwiches. Beyond the Tea Room, near the northern boundary, lies the newly opened Woodland Trail. This trail takes about forty minutes to complete and offers spectacular views of the river valley. The path is made of gravel, so please watch your step if it rains. For families with young children, the adventure playground is situated right behind the Visitor Centre, next to the souvenir shop. Restrooms are located near the main entrance and also behind the Glasshouse. Please remember that picking flowers or stepping onto the lawn in the Rose Garden is strictly prohibited. However, visitors are welcome to picnic on the Great Lawn near the lake. If you require wheelchair assistance, our staff at the desk can provide manual wheelchairs free of charge upon request. The gift shop closes at 5:00 PM, while the main gates will be locked at 6:00 PM sharp. We hope you enjoy your visit today!",
+      "questions": [
+        {
+          "type": "FILL_BLANK",
+          "promptText": "The name of the head tour leader is ____.",
+          "correctAnswer": "Claire"
+        },
+        {
+          "type": "MCQ",
+          "promptText": "How many varieties of roses are located in the Rose Garden?",
+          "options": [
+            "Over 100",
+            "Over 200",
+            "Over 300",
+            "Over 500"
+          ],
+          "correctAnswer": "Over 200"
+        },
+        {
+          "type": "FILL_BLANK",
+          "promptText": "The temperature inside the Glasshouse is maintained at ____ degrees Celsius.",
+          "correctAnswer": "26|twenty-six"
+        },
+        {
+          "type": "MCQ",
+          "promptText": "What time does lunch service begin at the Heritage Tea Room?",
+          "options": [
+            "11:30 AM",
+            "12:00 PM",
+            "12:30 PM",
+            "2:30 PM"
+          ],
+          "correctAnswer": "12:00 PM"
+        },
+        {
+          "type": "TRUE_FALSE_NG",
+          "promptText": "The Woodland Trail takes about twenty minutes to walk.",
+          "correctAnswer": "FALSE"
+        },
+        {
+          "type": "FILL_BLANK",
+          "promptText": "The Woodland Trail path is constructed from ____.",
+          "correctAnswer": "gravel"
+        },
+        {
+          "type": "MCQ",
+          "promptText": "Where is the adventure playground located?",
+          "options": [
+            "Next to the Glasshouse",
+            "Behind the Visitor Centre",
+            "Inside the Rose Garden",
+            "Near the lake"
+          ],
+          "correctAnswer": "Behind the Visitor Centre"
+        },
+        {
+          "type": "TRUE_FALSE_NG",
+          "promptText": "Visitors are allowed to pick flowers inside the Rose Garden.",
+          "correctAnswer": "FALSE"
+        },
+        {
+          "type": "MCQ",
+          "promptText": "Where are visitors permitted to have a picnic?",
+          "options": [
+            "In the Rose Garden",
+            "On the Great Lawn",
+            "Inside the Glasshouse",
+            "Along the Woodland Trail"
+          ],
+          "correctAnswer": "On the Great Lawn"
+        },
+        {
+          "type": "FILL_BLANK",
+          "promptText": "The main gates of the botanical gardens are locked at ____ PM.",
+          "correctAnswer": "6|6:00|six"
+        }
+      ]
+    },
+    {
+      "title": "Section 3: Academic Tutorial on Offshore Wind Energy Presentation",
+      "bodyText": "Professor Smith: Good afternoon, Maya and Leo. Thanks for coming in. How is your research project on offshore wind energy coming along?\nMaya: Hello Professor Smith. We have collected most of our data, but we are struggling to organize our presentation slides effectively.\nLeo: That is right. We have fifty slides at the moment, which we realize is way too long for a fifteen-minute presentation.\nProfessor Smith: Yes, fifty slides is definitely too many. You should aim for no more than ten to twelve slides. What is the main focus of your study?\nMaya: We are analyzing the cost efficiency of floating wind turbines compared to fixed-bottom turbines in deep water locations.\nProfessor Smith: Excellent. In that case, I suggest you divide the talk into three main sections: background methodology, economic analysis, and environmental impact.\nLeo: We were planning to include a long video clip showing turbine installation, but maybe we should cut that out?\nProfessor Smith: I would advise against long videos. A thirty-second clip is fine, but anything longer will waste your precious time.\nMaya: Okay, we will shorten the video. What about the case study section on the North Sea project?\nLeo: I think the North Sea case study is vital because it shows real financial figures from 2022.\nProfessor Smith: I agree with Leo. Keep the North Sea case study, but present the figures using simple charts rather than detailed text tables.\nMaya: That makes sense. Should we submit our draft slides to you by Friday?\nProfessor Smith: Friday noon would be perfect. That gives me time to review them before our final practice session on Monday morning.\nLeo: Great, we will email you the updated draft before 12:00 PM on Friday. Thank you for your guidance, Professor!",
+      "questions": [
+        {
+          "type": "MCQ",
+          "promptText": "What is the main topic of Maya and Leo's research project?",
+          "options": [
+            "Solar power efficiency",
+            "Offshore wind energy",
+            "Hydroelectric dams",
+            "Nuclear power plant costs"
+          ],
+          "correctAnswer": "Offshore wind energy"
+        },
+        {
+          "type": "FILL_BLANK",
+          "promptText": "The current draft created by the students contains ____ slides.",
+          "correctAnswer": "50|fifty"
+        },
+        {
+          "type": "MCQ",
+          "promptText": "What maximum number of slides does Professor Smith recommend?",
+          "options": [
+            "10 to 12",
+            "15 to 20",
+            "25",
+            "30"
+          ],
+          "correctAnswer": "10 to 12"
+        },
+        {
+          "type": "TRUE_FALSE_NG",
+          "promptText": "The project compares floating turbines with fixed-bottom turbines.",
+          "correctAnswer": "TRUE"
+        },
+        {
+          "type": "FILL_BLANK",
+          "promptText": "Professor Smith recommends dividing the presentation into ____ main sections.",
+          "correctAnswer": "3|three"
+        },
+        {
+          "type": "MCQ",
+          "promptText": "What length does Professor Smith suggest for any video clip?",
+          "options": [
+            "30 seconds",
+            "2 minutes",
+            "5 minutes",
+            "10 minutes"
+          ],
+          "correctAnswer": "30 seconds"
+        },
+        {
+          "type": "FILL_BLANK",
+          "promptText": "The case study chosen by the students focuses on a project in the ____ Sea.",
+          "correctAnswer": "North"
+        },
+        {
+          "type": "TRUE_FALSE_NG",
+          "promptText": "The North Sea case study features financial data from the year 2022.",
+          "correctAnswer": "TRUE"
+        },
+        {
+          "type": "MCQ",
+          "promptText": "How does Professor Smith suggest presenting the financial data?",
+          "options": [
+            "Detailed text tables",
+            "Simple charts",
+            "Written paragraphs",
+            "Audio recordings"
+          ],
+          "correctAnswer": "Simple charts"
+        },
+        {
+          "type": "FILL_BLANK",
+          "promptText": "The updated draft slides must be emailed by Friday at ____.",
+          "correctAnswer": "noon|12:00 PM|12 PM|12"
+        }
+      ]
+    },
+    {
+      "title": "Section 4: Lecture on Urban Heat Islands",
+      "bodyText": "Lecturer: Good morning, everyone. In today's lecture on urban microclimates, we will explore the phenomenon known as the Urban Heat Island effect, or UHI. This effect occurs when metropolitan areas experience significantly higher temperatures than surrounding rural regions. The primary cause of UHI is the replacement of natural vegetation with artificial surfaces such as concrete, asphalt, and brick. These dark, dense materials absorb solar radiation during the daytime and re-emit it as thermal energy at night, preventing cities from cooling down properly. Furthermore, high-density tall buildings create what urban geographers call urban canyons. These canyons trap heat by restricting wind circulation and reducing airflow between structures. Another key contributor is anthropogenic heat, which refers to energy released by human activities, including vehicle exhaust, industrial machinery, and air conditioning units. Research indicates that urban areas can be between two to five degrees Celsius warmer during the day, and up to twelve degrees warmer at night compared to nearby rural spaces. The consequences of UHI are far-reaching. Increased urban temperatures lead to elevated energy consumption due to higher demand for air conditioning, which in turn escalates greenhouse gas emissions. Health risks also rise significantly, particularly among vulnerable populations such as the elderly, who suffer higher rates of heat stroke and respiratory distress. To mitigate this problem, modern urban planners are implementing several sustainable strategies. One effective approach is green roofing, which involves planting vegetation on top of commercial and residential buildings. Plants regulate ambient temperature through evapotranspiration. Additionally, the use of cool pavements—materials treated with reflective coatings—can reflect up to forty percent more sunlight than conventional dark asphalt. Finally, expanding urban tree canopy cover by ten percent can reduce local ambient temperatures by nearly one point five degrees Celsius. Next week, we will examine specific case studies from Tokyo and Chicago.",
+      "questions": [
+        {
+          "type": "FILL_BLANK",
+          "promptText": "The lecture covers the phenomenon known as the Urban ____ Island effect.",
+          "correctAnswer": "Heat"
+        },
+        {
+          "type": "MCQ",
+          "promptText": "Which artificial materials are specifically mentioned as absorbing solar radiation?",
+          "options": [
+            "Wood and plastic",
+            "Concrete, asphalt, and brick",
+            "Glass and steel",
+            "Clay and stone"
+          ],
+          "correctAnswer": "Concrete, asphalt, and brick"
+        },
+        {
+          "type": "TRUE_FALSE_NG",
+          "promptText": "Artificial surfaces release thermal energy during the nighttime.",
+          "correctAnswer": "TRUE"
+        },
+        {
+          "type": "FILL_BLANK",
+          "promptText": "High-density tall buildings create urban ____ that trap heat.",
+          "correctAnswer": "canyons"
+        },
+        {
+          "type": "MCQ",
+          "promptText": "What term refers to heat generated directly by human activities?",
+          "options": [
+            "Geothermal heat",
+            "Anthropogenic heat",
+            "Radiative heat",
+            "Convective heat"
+          ],
+          "correctAnswer": "Anthropogenic heat"
+        },
+        {
+          "type": "FILL_BLANK",
+          "promptText": "At night, urban areas can be up to ____ degrees warmer than surrounding rural areas.",
+          "correctAnswer": "12|twelve"
+        },
+        {
+          "type": "TRUE_FALSE_NG",
+          "promptText": "The Urban Heat Island effect leads to lower demand for air conditioning.",
+          "correctAnswer": "FALSE"
+        },
+        {
+          "type": "MCQ",
+          "promptText": "Which group of people is highlighted as particularly vulnerable to heat-related illnesses?",
+          "options": [
+            "Young children",
+            "Construction workers",
+            "The elderly",
+            "Athletes"
+          ],
+          "correctAnswer": "The elderly"
+        },
+        {
+          "type": "FILL_BLANK",
+          "promptText": "Cool pavements can reflect up to ____ percent more sunlight than dark asphalt.",
+          "correctAnswer": "40|forty"
+        },
+        {
+          "type": "MCQ",
+          "promptText": "Increasing tree canopy cover by 10 percent can lower ambient temperatures by how much?",
+          "options": [
+            "0.5 degrees Celsius",
+            "1.5 degrees Celsius",
+            "2.5 degrees Celsius",
+            "3.0 degrees Celsius"
+          ],
+          "correctAnswer": "1.5 degrees Celsius"
+        }
+      ]
+    }
+  ],
+  "writing": {
+    "tasks": [
+      {
+        "title": "Academic Writing Task 1",
+        "taskType": "TASK1",
+        "minWords": 150,
+        "prompt": "The bar chart below shows the percentage of water used by different sectors in three selected countries in 2020. Summarise the information by selecting and reporting the main features, and make comparisons where relevant.",
+        "chart": {
+          "type": "bar",
+          "title": "Percentage of Water Used by Sector in 2020",
+          "unit": "%",
+          "categories": [
+            "Agriculture",
+            "Industrial",
+            "Domestic"
+          ],
+          "series": [
+            {
+              "name": "Australia",
+              "values": [
+                70,
+                12,
+                18
+              ]
+            },
+            {
+              "name": "Egypt",
+              "values": [
+                82,
+                10,
+                8
+              ]
+            },
+            {
+              "name": "Canada",
+              "values": [
+                12,
+                68,
+                20
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "title": "Academic Writing Task 2",
+        "taskType": "TASK2",
+        "minWords": 250,
+        "prompt": "In recent years, many educational institutions have shifted towards online and distance learning rather than traditional face-to-face instruction. Some people believe this development benefits students greatly, while others argue that it hinders social and academic development. Discuss both views and give your own opinion."
+      }
+    ]
+  },
+  "speaking": {
+    "sets": [
+      {
+        "title": "Technology and Daily Life: Mobile Applications",
+        "part1": {
+          "promptText": "Let's talk about smartphone applications in your daily routine.",
+          "followUps": [
+            "Which mobile app do you use most frequently every day?",
+            "How has this app helped you manage your daily tasks?",
+            "Do you think people rely too much on mobile applications nowadays?"
+          ]
+        },
+        "part2": {
+          "promptText": "Describe a useful piece of technology that you recently started using.",
+          "followUps": [
+            "what this piece of technology is",
+            "how you first learned about it",
+            "what you mainly use it for",
+            "and explain why you find it so helpful in your routine"
+          ]
+        },
+        "part3": {
+          "promptText": "Now let us discuss some general questions about technology in modern society.",
+          "followUps": [
+            "In what ways has technology altered the way people balance work and personal life?",
+            "Do you think traditional devices will eventually be completely replaced by smart technology?",
+            "How might future technological developments impact human social interactions?"
+          ]
+        }
+      },
+      {
+        "title": "Environment and Community: Local Green Spaces",
+        "part1": {
+          "promptText": "Let's discuss local parks and outdoor public spaces in your area.",
+          "followUps": [
+            "How often do you visit parks or outdoor spaces near your home?",
+            "What activities do people usually enjoy doing in public parks?",
+            "Do you feel there are enough green spaces in your city?"
+          ]
+        },
+        "part2": {
+          "promptText": "Describe a community or environmental project that you know about.",
+          "followUps": [
+            "what the project is focused on",
+            "where and when it takes place",
+            "who participates in this activity",
+            "and explain how this project benefits the local environment"
+          ]
+        },
+        "part3": {
+          "promptText": "Let's explore some broader topics related to community efforts and environmental protection.",
+          "followUps": [
+            "Why is it important for local communities to take care of public environments?",
+            "Should governments or individual citizens hold primary responsibility for environmental conservation?",
+            "How can city planners encourage residents to spend more time in natural settings?"
+          ]
+        }
+      }
+    ]
+  }
+}

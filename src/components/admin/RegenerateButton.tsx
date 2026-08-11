@@ -1,28 +1,42 @@
 "use client";
 
 import { useState } from "react";
-import { regenerateAllContent } from "@/lib/actions/adminRegenerate";
+import { useRouter } from "next/navigation";
 import { REGENERATE_CONFIRM_PHRASE } from "@/lib/constants";
 
 export default function RegenerateButton() {
+  const router = useRouter();
   const [open, setOpen] = useState(false);
   const [confirmText, setConfirmText] = useState("");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
-  const [success, setSuccess] = useState(false);
+  const [success, setSuccess] = useState<string | null>(null);
 
   async function handleConfirm() {
     setError(null);
     setLoading(true);
-    const result = await regenerateAllContent(confirmText);
-    setLoading(false);
-    if (result?.error) {
-      setError(result.error);
-      return;
+    try {
+      const res = await fetch("/api/admin/regenerate", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ confirmPhrase: confirmText }),
+      });
+      const data = await res.json();
+      if (!res.ok) {
+        setError(data.error ?? "Xatolik yuz berdi.");
+        return;
+      }
+      setSuccess(
+        `Yangilandi! Reading: ${data.readingQuestions} ta savol, Listening: ${data.listeningQuestions} ta savol.`
+      );
+      setOpen(false);
+      setConfirmText("");
+      router.refresh();
+    } catch {
+      setError("So'rov yuborilmadi. Internet aloqasini tekshirib, qayta urinib ko'ring.");
+    } finally {
+      setLoading(false);
     }
-    setSuccess(true);
-    setOpen(false);
-    setConfirmText("");
   }
 
   return (
@@ -32,7 +46,7 @@ export default function RegenerateButton() {
           type="button"
           onClick={() => {
             setOpen(true);
-            setSuccess(false);
+            setSuccess(null);
             setError(null);
           }}
           className="bg-red-600 text-white px-5 py-2.5 rounded-lg text-sm font-medium hover:bg-red-700"
@@ -63,7 +77,7 @@ export default function RegenerateButton() {
               className="bg-red-600 text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-red-700 disabled:opacity-50"
             >
               {loading
-                ? "AI testlar yaratmoqda... (bir necha soniya)"
+                ? "AI testlar yaratmoqda... (30-60 soniya, sahifani yopmang)"
                 : "Ha, hammasini o'chirib, yangisini yarat"}
             </button>
             <button
@@ -84,8 +98,8 @@ export default function RegenerateButton() {
 
       {success && (
         <p className="mt-3 text-sm text-emerald-700 bg-emerald-50 border border-emerald-200 rounded-lg px-3 py-2">
-          Muvaffaqiyatli yangilandi! Barcha testlar yangi kontent bilan almashtirildi va eski
-          natijalar o&apos;chirildi.
+          {success} Barcha testlar yangi kontent bilan almashtirildi va eski natijalar
+          o&apos;chirildi.
         </p>
       )}
     </div>

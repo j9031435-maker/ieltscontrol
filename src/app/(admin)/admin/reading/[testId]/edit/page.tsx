@@ -10,19 +10,27 @@ export default async function EditReadingTestPage({
   const { testId } = await params;
   const test = await prisma.test.findUnique({
     where: { id: testId },
-    include: { questions: { orderBy: { order: "asc" } } },
+    include: {
+      parts: {
+        orderBy: { part: "asc" },
+        include: { questions: { orderBy: { order: "asc" } } },
+      },
+    },
   });
   if (!test || test.section !== "READING") notFound();
 
   const initial: TestFormInitial = {
     title: test.title,
     description: test.description ?? "",
-    bodyText: test.bodyText,
-    questions: test.questions.map((q) => ({
-      type: q.type,
-      promptText: q.promptText,
-      options: q.options ? (JSON.parse(q.options) as string[]).join(", ") : "",
-      correctAnswer: q.correctAnswer,
+    parts: test.parts.map((p) => ({
+      title: p.title ?? "",
+      bodyText: p.bodyText,
+      questions: p.questions.map((q) => ({
+        type: q.type,
+        promptText: q.promptText,
+        options: q.options ? (JSON.parse(q.options) as string[]).join(", ") : "",
+        correctAnswer: q.correctAnswer,
+      })),
     })),
   };
 

@@ -1,6 +1,8 @@
 import { notFound } from "next/navigation";
 import { prisma } from "@/lib/prisma";
 import WritingRunner from "@/components/WritingRunner";
+import WritingChart from "@/components/WritingChart";
+import { parseChartSpec } from "@/lib/chartSpec";
 
 export default async function WritingTaskPage({
   params,
@@ -11,6 +13,8 @@ export default async function WritingTaskPage({
   const task = await prisma.writingTask.findUnique({ where: { id: taskId } });
   if (!task) notFound();
 
+  const chart = parseChartSpec(task.chartData);
+
   return (
     <div>
       <span className="inline-block text-xs font-medium text-indigo-600 bg-indigo-50 rounded-full px-2 py-0.5 mb-2">
@@ -20,6 +24,11 @@ export default async function WritingTaskPage({
       <div className="rounded-xl border border-slate-200 bg-white p-6 whitespace-pre-line text-sm leading-relaxed text-slate-800">
         {task.prompt}
       </div>
+      {chart && (
+        <div className="mt-4">
+          <WritingChart spec={chart} />
+        </div>
+      )}
       <WritingRunner taskId={task.id} minWords={task.minWords} />
     </div>
   );

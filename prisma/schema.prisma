@@ -52,28 +52,44 @@ model NewsPost {
   createdAt DateTime @default(now())
 }
 
+// One full exam, mirroring the real IELTS structure: a Reading test holds
+// 3 passages, a Listening test holds 4 sections. The student takes all
+// parts in one sitting for a single band score, so Test.id stays the
+// identity referenced by Attempt.refId.
 model Test {
   id          String   @id @default(cuid())
   section     Section
   title       String
   description String?
-  // Reading: full passage text. Listening: script read aloud via TTS.
-  bodyText    String
   createdAt   DateTime @default(now())
 
+  parts TestPart[]
+}
+
+model TestPart {
+  id       String @id @default(cuid())
+  testId   String
+  part     Int // Reading: 1-3 (passages). Listening: 1-4 (sections).
+  title    String?
+  // Reading: passage text. Listening: script read aloud via TTS.
+  bodyText String
+
+  test      Test       @relation(fields: [testId], references: [id], onDelete: Cascade)
   questions Question[]
+
+  @@unique([testId, part])
 }
 
 model Question {
   id            String       @id @default(cuid())
-  testId        String
+  partId        String
   order         Int
   type          QuestionType
   promptText    String
   options       String? // JSON-encoded array of strings, for MCQ/MATCHING
   correctAnswer String // plain string, or JSON-encoded for MATCHING
 
-  test Test @relation(fields: [testId], references: [id], onDelete: Cascade)
+  part TestPart @relation(fields: [partId], references: [id], onDelete: Cascade)
 }
 
 model WritingTask {
@@ -81,6 +97,9 @@ model WritingTask {
   title     String
   taskType  WritingTaskType
   prompt    String
+  // Task 1 only: JSON-encoded chart spec rendered as a real diagram.
+  // See ChartSpec in src/lib/chartSpec.ts.
+  chartData String?
   minWords  Int             @default(150)
   createdAt DateTime        @default(now())
 }

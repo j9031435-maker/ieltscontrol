@@ -21,6 +21,7 @@ export default function WritingTaskForm({
   const [taskType, setTaskType] = useState<WritingTaskType>(initial?.taskType ?? "TASK2");
   const [minWords, setMinWords] = useState(initial?.minWords ?? 250);
   const [prompt, setPrompt] = useState(initial?.prompt ?? "");
+  const [chartData, setChartData] = useState(initial?.chartData ?? "");
   const [submitting, setSubmitting] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
@@ -33,11 +34,13 @@ export default function WritingTaskForm({
     }
     setSubmitting(true);
     try {
-      const data = { title, taskType, minWords, prompt };
-      if (taskId) {
-        await updateWritingTask(taskId, data);
-      } else {
-        await createWritingTask(data);
+      const data = { title, taskType, minWords, prompt, chartData };
+      const result = taskId
+        ? await updateWritingTask(taskId, data)
+        : await createWritingTask(data);
+      if (result?.error) {
+        setError(result.error);
+        setSubmitting(false);
       }
     } catch (err) {
       if (err instanceof Error && err.message === "NEXT_REDIRECT") throw err;
@@ -87,6 +90,28 @@ export default function WritingTaskForm({
           className="w-full rounded-lg border border-slate-300 px-3 py-2 text-sm font-mono focus:outline-none focus:ring-2 focus:ring-indigo-500"
         />
       </div>
+      {taskType === "TASK1" && (
+        <div>
+          <label className="block text-sm font-medium mb-1">
+            Diagramma ma&apos;lumoti (JSON, ixtiyoriy)
+          </label>
+          <p className="text-xs text-slate-500 mb-1">
+            To&apos;ldirilsa, o&apos;quvchiga haqiqiy diagramma chizib ko&apos;rsatiladi. Namuna:{" "}
+            <code className="font-mono">
+              {
+                '{"type":"bar","title":"Internet access","unit":"%","categories":["2005","2020"],"series":[{"name":"Country A","values":[38,96]}]}'
+              }
+            </code>{" "}
+            (type: bar, line, pie yoki table)
+          </p>
+          <textarea
+            value={chartData}
+            onChange={(e) => setChartData(e.target.value)}
+            rows={6}
+            className="w-full rounded-lg border border-slate-300 px-3 py-2 text-sm font-mono focus:outline-none focus:ring-2 focus:ring-indigo-500"
+          />
+        </div>
+      )}
       {error && <p className="text-sm text-red-600">{error}</p>}
       <div className="flex gap-3">
         <button

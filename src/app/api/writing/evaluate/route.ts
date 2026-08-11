@@ -45,7 +45,13 @@ export async function POST(req: Request) {
   try {
     const model = getGeminiJsonModel(WRITING_SYSTEM_PROMPT);
     const result = await model.generateContent(
-      buildWritingUserPrompt(task.taskType, task.prompt, task.minWords, responseText)
+      buildWritingUserPrompt(
+        task.taskType,
+        task.prompt,
+        task.minWords,
+        responseText,
+        task.chartData
+      )
     );
     evaluation = parseWritingEvaluation(result.response.text());
   } catch (err) {

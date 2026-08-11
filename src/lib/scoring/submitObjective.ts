@@ -20,13 +20,20 @@ export async function handleObjectiveSubmit(req: Request, section: Section) {
 
   const test = await prisma.test.findUnique({
     where: { id: testId },
-    include: { questions: { orderBy: { order: "asc" } } },
+    include: {
+      parts: {
+        orderBy: { part: "asc" },
+        include: { questions: { orderBy: { order: "asc" } } },
+      },
+    },
   });
   if (!test || test.section !== section) {
     return NextResponse.json({ error: "Test topilmadi." }, { status: 404 });
   }
 
-  const { details, rawScore, total } = gradeTest(test.questions, answers);
+  // The whole multi-part test is graded as one paper, like the real exam.
+  const allQuestions = test.parts.flatMap((p) => p.questions);
+  const { details, rawScore, total } = gradeTest(allQuestions, answers);
   const bandScore = rawScoreToBand(rawScore, total);
 
   await prisma.attempt.create({

@@ -21,6 +21,7 @@ export default async function EditWritingTaskPage({
           taskType: task.taskType,
           minWords: task.minWords,
           prompt: task.prompt,
+          chartData: task.chartData ?? "",
         }}
       />
     </div>

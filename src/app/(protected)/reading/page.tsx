@@ -5,6 +5,7 @@ export default async function ReadingListPage() {
   const tests = await prisma.test.findMany({
     where: { section: "READING" },
     orderBy: { createdAt: "asc" },
+    include: { parts: { select: { _count: { select: { questions: true } } } } },
   });
 
   return (
@@ -15,16 +16,22 @@ export default async function ReadingListPage() {
         to&apos;g&apos;ri javoblarni darhol ko&apos;rasiz.
       </p>
       <div className="grid gap-4 sm:grid-cols-2">
-        {tests.map((t) => (
-          <Link
-            key={t.id}
-            href={`/reading/${t.id}`}
-            className="block rounded-xl border border-slate-200 bg-white p-5 hover:border-indigo-300 hover:shadow-sm transition"
-          >
-            <h2 className="font-semibold">{t.title}</h2>
-            <p className="mt-1 text-sm text-slate-600">{t.description}</p>
-          </Link>
-        ))}
+        {tests.map((t) => {
+          const questionCount = t.parts.reduce((acc, p) => acc + p._count.questions, 0);
+          return (
+            <Link
+              key={t.id}
+              href={`/reading/${t.id}`}
+              className="block rounded-xl border border-slate-200 bg-white p-5 hover:border-indigo-300 hover:shadow-sm transition"
+            >
+              <h2 className="font-semibold">{t.title}</h2>
+              <p className="mt-1 text-sm text-slate-600">{t.description}</p>
+              <p className="mt-2 text-xs font-medium text-indigo-600">
+                {t.parts.length} ta matn · {questionCount} ta savol
+              </p>
+            </Link>
+          );
+        })}
       </div>
     </div>
   );

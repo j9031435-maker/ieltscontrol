@@ -3,13 +3,17 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import type { Section, QuestionType } from "@prisma/client";
-import { createTest, updateTest, type QuestionInput } from "@/lib/actions/adminTests";
+import {
+  createTest,
+  updateTest,
+  type QuestionInput,
+  type PartInput,
+} from "@/lib/actions/adminTests";
 
 export interface TestFormInitial {
   title: string;
   description: string;
-  bodyText: string;
-  questions: QuestionInput[];
+  parts: PartInput[];
 }
 
 const QUESTION_TYPES: { value: QuestionType; label: string }[] = [
@@ -18,12 +22,21 @@ const QUESTION_TYPES: { value: QuestionType; label: string }[] = [
   { value: "FILL_BLANK", label: "Bo'sh joyni to'ldirish" },
 ];
 
-const emptyQuestion: QuestionInput = {
-  type: "MCQ",
-  promptText: "",
-  options: "",
-  correctAnswer: "",
+// The real exam: Academic Reading has 3 passages, Listening has 4 sections.
+const DEFAULT_PART_COUNT: Record<Section, number> = {
+  READING: 3,
+  LISTENING: 4,
+  WRITING: 1,
+  SPEAKING: 1,
 };
+
+function emptyQuestion(): QuestionInput {
+  return { type: "MCQ", promptText: "", options: "", correctAnswer: "" };
+}
+
+function emptyPart(): PartInput {
+  return { title: "", bodyText: "", questions: [emptyQuestion()] };
+}
 
 export default function TestForm({
   section,
@@ -37,35 +50,73 @@ export default function TestForm({
   const router = useRouter();
   const [title, setTitle] = useState(initial?.title ?? "");
   const [description, setDescription] = useState(initial?.description ?? "");
-  const [bodyText, setBodyText] = useState(initial?.bodyText ?? "");
-  const [questions, setQuestions] = useState<QuestionInput[]>(
-    initial?.questions ?? [{ ...emptyQuestion }]
+  const [parts, setParts] = useState<PartInput[]>(
+    initial?.parts ?? Array.from({ length: DEFAULT_PART_COUNT[section] }, emptyPart)
   );
   const [submitting, setSubmitting] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
-  function updateQuestion(index: number, patch: Partial<QuestionInput>) {
-    setQuestions((qs) => qs.map((q, i) => (i === index ? { ...q, ...patch } : q)));
+  const partNoun = section === "READING" ? "Part" : "Section";
+  const bodyLabel =
+    section === "READING" ? "Matn (passage)" : "Skript (ovozli o'qiladi)";
+
+  function updatePart(pi: number, patch: Partial<PartInput>) {
+    setParts((ps) => ps.map((p, i) => (i === pi ? { ...p, ...patch } : p)));
   }
 
-  function addQuestion() {
-    setQuestions((qs) => [...qs, { ...emptyQuestion }]);
+  function updateQuestion(pi: number, qi: number, patch: Partial<QuestionInput>) {
+    setParts((ps) =>
+      ps.map((p, i) =>
+        i === pi
+          ? { ...p, questions: p.questions.map((q, j) => (j === qi ? { ...q, ...patch } : q)) }
+          : p
+      )
+    );
   }
 
-  function removeQuestion(index: number) {
-    setQuestions((qs) => qs.filter((_, i) => i !== index));
+  function addQuestion(pi: number) {
+    setParts((ps) =>
+      ps.map((p, i) => (i === pi ? { ...p, questions: [...p.questions, emptyQuestion()] } : p))
+    );
+  }
+
+  function removeQuestion(pi: number, qi: number) {
+    setParts((ps) =>
+      ps.map((p, i) =>
+        i === pi ? { ...p, questions: p.questions.filter((_, j) => j !== qi) } : p
+      )
+    );
+  }
+
+  function addPart() {
+    setParts((ps) => [...ps, emptyPart()]);
+  }
+
+  function removePart(pi: number) {
+    setParts((ps) => ps.filter((_, i) => i !== pi));
   }
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
     setError(null);
-    if (!title.trim() || !bodyText.trim() || questions.length === 0) {
-      setError("Sarlavha, matn va kamida bitta savol kiritilishi kerak.");
+    if (!title.trim()) {
+      setError("Sarlavha kiritilishi kerak.");
+      return;
+    }
+    if (parts.length === 0) {
+      setError(`Kamida bitta ${partNoun} bo'lishi kerak.`);
+      return;
+    }
+    const emptyIndex = parts.findIndex((p) => !p.bodyText.trim() || p.questions.length === 0);
+    if (emptyIndex !== -1) {
+      setError(
+        `${partNoun} ${emptyIndex + 1}: matn va kamida bitta savol kiritilishi kerak.`
+      );
       return;
     }
     setSubmitting(true);
     try {
-      const data = { title, description, bodyText, questions };
+      const data = { title, description, parts };
       if (testId) {
         await updateTest(testId, section, data);
       } else {
@@ -78,16 +129,16 @@ export default function TestForm({
     }
   }
 
-  const bodyLabel =
-    section === "READING" ? "Matn (passage)" : "Skript (Listening uchun ovozli o'qiladi)";
+  const totalQuestions = parts.reduce((acc, p) => acc + p.questions.length, 0);
 
   return (
     <form onSubmit={handleSubmit} className="space-y-6">
       <div>
-        <label className="block text-sm font-medium mb-1">Sarlavha</label>
+        <label className="block text-sm font-medium mb-1">Test sarlavhasi</label>
         <input
           value={title}
           onChange={(e) => setTitle(e.target.value)}
+          placeholder={section === "READING" ? "Academic Reading Test 1" : "Listening Test 1"}
           className="w-full rounded-lg border border-slate-300 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500"
         />
       </div>
@@ -99,97 +150,142 @@ export default function TestForm({
           className="w-full rounded-lg border border-slate-300 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500"
         />
       </div>
-      <div>
-        <label className="block text-sm font-medium mb-1">{bodyLabel}</label>
-        <textarea
-          value={bodyText}
-          onChange={(e) => setBodyText(e.target.value)}
-          rows={10}
-          className="w-full rounded-lg border border-slate-300 px-3 py-2 text-sm font-mono focus:outline-none focus:ring-2 focus:ring-indigo-500"
-        />
+
+      <div className="flex items-center justify-between border-t border-slate-200 pt-4">
+        <p className="text-sm text-slate-600">
+          {parts.length} ta {partNoun} · jami {totalQuestions} ta savol
+        </p>
+        <button
+          type="button"
+          onClick={addPart}
+          className="text-sm text-indigo-600 font-medium hover:text-indigo-700"
+        >
+          + {partNoun} qo&apos;shish
+        </button>
       </div>
 
-      <div>
-        <div className="flex items-center justify-between mb-2">
-          <h3 className="font-semibold">Savollar</h3>
-          <button
-            type="button"
-            onClick={addQuestion}
-            className="text-sm text-indigo-600 font-medium hover:text-indigo-700"
-          >
-            + Savol qo&apos;shish
-          </button>
-        </div>
-        <div className="space-y-4">
-          {questions.map((q, i) => (
-            <div key={i} className="rounded-lg border border-slate-200 p-4 bg-slate-50">
-              <div className="flex items-center justify-between mb-2">
-                <span className="text-sm font-medium text-slate-500">{i + 1}-savol</span>
-                <button
-                  type="button"
-                  onClick={() => removeQuestion(i)}
-                  className="text-sm text-red-600 hover:text-red-700"
-                >
-                  O&apos;chirish
-                </button>
-              </div>
-              <div className="grid sm:grid-cols-2 gap-3">
-                <div>
-                  <label className="block text-xs text-slate-500 mb-1">Turi</label>
-                  <select
-                    value={q.type}
-                    onChange={(e) => updateQuestion(i, { type: e.target.value as QuestionType })}
-                    className="w-full rounded-lg border border-slate-300 px-2 py-1.5 text-sm"
+      {parts.map((p, pi) => (
+        <div key={pi} className="rounded-xl border-2 border-indigo-100 p-4">
+          <div className="flex items-center justify-between mb-3">
+            <h3 className="font-bold text-indigo-800">
+              {partNoun} {pi + 1}
+            </h3>
+            {parts.length > 1 && (
+              <button
+                type="button"
+                onClick={() => removePart(pi)}
+                className="text-sm text-red-600 hover:text-red-700"
+              >
+                {partNoun}ni o&apos;chirish
+              </button>
+            )}
+          </div>
+
+          <div className="mb-3">
+            <label className="block text-xs text-slate-500 mb-1">
+              {partNoun} nomi (ixtiyoriy)
+            </label>
+            <input
+              value={p.title}
+              onChange={(e) => updatePart(pi, { title: e.target.value })}
+              className="w-full rounded-lg border border-slate-300 px-2 py-1.5 text-sm"
+            />
+          </div>
+
+          <div className="mb-4">
+            <label className="block text-xs text-slate-500 mb-1">{bodyLabel}</label>
+            <textarea
+              value={p.bodyText}
+              onChange={(e) => updatePart(pi, { bodyText: e.target.value })}
+              rows={8}
+              className="w-full rounded-lg border border-slate-300 px-3 py-2 text-sm font-mono focus:outline-none focus:ring-2 focus:ring-indigo-500"
+            />
+          </div>
+
+          <div className="flex items-center justify-between mb-2">
+            <h4 className="font-semibold text-sm">Savollar ({p.questions.length})</h4>
+            <button
+              type="button"
+              onClick={() => addQuestion(pi)}
+              className="text-sm text-indigo-600 font-medium hover:text-indigo-700"
+            >
+              + Savol qo&apos;shish
+            </button>
+          </div>
+
+          <div className="space-y-4">
+            {p.questions.map((q, qi) => (
+              <div key={qi} className="rounded-lg border border-slate-200 p-4 bg-slate-50">
+                <div className="flex items-center justify-between mb-2">
+                  <span className="text-sm font-medium text-slate-500">{qi + 1}-savol</span>
+                  <button
+                    type="button"
+                    onClick={() => removeQuestion(pi, qi)}
+                    className="text-sm text-red-600 hover:text-red-700"
                   >
-                    {QUESTION_TYPES.map((t) => (
-                      <option key={t.value} value={t.value}>
-                        {t.label}
-                      </option>
-                    ))}
-                  </select>
+                    O&apos;chirish
+                  </button>
                 </div>
-                <div>
-                  <label className="block text-xs text-slate-500 mb-1">
-                    To&apos;g&apos;ri javob{" "}
-                    {q.type === "FILL_BLANK" && "(alternativlar uchun | bilan ajrating)"}
-                  </label>
-                  <input
-                    value={q.correctAnswer}
-                    onChange={(e) => updateQuestion(i, { correctAnswer: e.target.value })}
-                    className="w-full rounded-lg border border-slate-300 px-2 py-1.5 text-sm"
-                  />
+                <div className="grid sm:grid-cols-2 gap-3">
+                  <div>
+                    <label className="block text-xs text-slate-500 mb-1">Turi</label>
+                    <select
+                      value={q.type}
+                      onChange={(e) =>
+                        updateQuestion(pi, qi, { type: e.target.value as QuestionType })
+                      }
+                      className="w-full rounded-lg border border-slate-300 px-2 py-1.5 text-sm"
+                    >
+                      {QUESTION_TYPES.map((t) => (
+                        <option key={t.value} value={t.value}>
+                          {t.label}
+                        </option>
+                      ))}
+                    </select>
+                  </div>
+                  <div>
+                    <label className="block text-xs text-slate-500 mb-1">
+                      To&apos;g&apos;ri javob{" "}
+                      {q.type === "FILL_BLANK" && "(alternativlar uchun | bilan ajrating)"}
+                    </label>
+                    <input
+                      value={q.correctAnswer}
+                      onChange={(e) => updateQuestion(pi, qi, { correctAnswer: e.target.value })}
+                      className="w-full rounded-lg border border-slate-300 px-2 py-1.5 text-sm"
+                    />
+                  </div>
                 </div>
-              </div>
-              <div className="mt-3">
-                <label className="block text-xs text-slate-500 mb-1">Savol matni</label>
-                <input
-                  value={q.promptText}
-                  onChange={(e) => updateQuestion(i, { promptText: e.target.value })}
-                  className="w-full rounded-lg border border-slate-300 px-2 py-1.5 text-sm"
-                />
-              </div>
-              {q.type === "MCQ" && (
                 <div className="mt-3">
-                  <label className="block text-xs text-slate-500 mb-1">
-                    Variantlar (vergul bilan ajrating)
-                  </label>
+                  <label className="block text-xs text-slate-500 mb-1">Savol matni</label>
                   <input
-                    value={q.options}
-                    onChange={(e) => updateQuestion(i, { options: e.target.value })}
-                    placeholder="Variant 1, Variant 2, Variant 3"
+                    value={q.promptText}
+                    onChange={(e) => updateQuestion(pi, qi, { promptText: e.target.value })}
                     className="w-full rounded-lg border border-slate-300 px-2 py-1.5 text-sm"
                   />
                 </div>
-              )}
-              {q.type === "TRUE_FALSE_NG" && (
-                <p className="mt-2 text-xs text-slate-500">
-                  To&apos;g&apos;ri javob maydoniga aynan: TRUE, FALSE yoki NOT GIVEN deb yozing.
-                </p>
-              )}
-            </div>
-          ))}
+                {q.type === "MCQ" && (
+                  <div className="mt-3">
+                    <label className="block text-xs text-slate-500 mb-1">
+                      Variantlar (vergul bilan ajrating)
+                    </label>
+                    <input
+                      value={q.options}
+                      onChange={(e) => updateQuestion(pi, qi, { options: e.target.value })}
+                      placeholder="Variant 1, Variant 2, Variant 3"
+                      className="w-full rounded-lg border border-slate-300 px-2 py-1.5 text-sm"
+                    />
+                  </div>
+                )}
+                {q.type === "TRUE_FALSE_NG" && (
+                  <p className="mt-2 text-xs text-slate-500">
+                    To&apos;g&apos;ri javob maydoniga aynan: TRUE, FALSE yoki NOT GIVEN deb yozing.
+                  </p>
+                )}
+              </div>
+            ))}
+          </div>
         </div>
-      </div>
+      ))}
 
       {error && <p className="text-sm text-red-600">{error}</p>}
       <div className="flex gap-3">

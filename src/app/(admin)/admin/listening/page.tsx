@@ -7,7 +7,7 @@ export default async function AdminListeningListPage() {
   const tests = await prisma.test.findMany({
     where: { section: "LISTENING" },
     orderBy: { createdAt: "desc" },
-    include: { _count: { select: { questions: true } } },
+    include: { parts: { select: { _count: { select: { questions: true } } } } },
   });
 
   return (
@@ -29,7 +29,10 @@ export default async function AdminListeningListPage() {
           >
             <div>
               <h2 className="font-semibold">{t.title}</h2>
-              <p className="text-sm text-slate-500">{t._count.questions} ta savol</p>
+              <p className="text-sm text-slate-500">
+                {t.parts.length} ta Section ·{" "}
+                {t.parts.reduce((acc, p) => acc + p._count.questions, 0)} ta savol
+              </p>
             </div>
             <div className="flex items-center gap-4">
               <Link
